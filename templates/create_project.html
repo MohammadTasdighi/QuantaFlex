@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create a New Project</h2>
+<form method="POST" id="project-form">
+    {{ form.hidden_tag() }}
+    
+    <div>
+        {{ form.name.label }}<br>
+        {{ form.name(size=32) }}<br>
+        {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+
+    <div>
+        <label>Select Features:</label>
+        <div id="feature-selection" class="feature-selection">
+            {% for feature in form.features %}
+                <div class="feature-box" data-value="{{ feature.id }}">
+                    <h4>{{ feature.label }}</h4>
+                    <p>{{ feature.description }}</p> <!-- Assuming each feature has a description -->
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <input type="hidden" name="selected_features" id="selected_features">
+
+    <div>
+        {{ form.submit(class="button") }}
+    </div>
+</form>
+
+<script>
+    // JavaScript to handle feature selection
+    document.querySelectorAll('.feature-box').forEach(box => {
+        box.addEventListener('click', () => {
+            box.classList.toggle('selected');
+            updateSelectedFeatures();
+        });
+    });
+
+    function updateSelectedFeatures() {
+        const selected = Array.from(document.querySelectorAll('.feature-box.selected'))
+            .map(box => box.getAttribute('data-value'));
+        document.getElementById('selected_features').value = selected.join(',');
+    }
+</script>
+
+<style>
+    /* Feature Box Styles */
+    .feature-selection {
+        display: flex;
+        flex-wrap: wrap; /* Allow boxes to wrap in the container */
+        gap: 15px; /* Space between boxes */
+    }
+
+    .feature-box {
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        width: calc(25% - 20px); /* Adjust width for responsiveness */
+        min-width: 150px; /* Minimum width for smaller screens */
+    }
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        border-color: #1976d2; /* Highlight border on hover */
+    }
+
+    .feature-box.selected {
+        border-color: #ff9800; /* Highlight selected box */
+        background-color: #fff3e0; /* Light background for selected feature */
+    }
+</style>
+{% endblock %}

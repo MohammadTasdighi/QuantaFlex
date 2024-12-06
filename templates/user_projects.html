@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Projects</h2>
+
+<div class="project-container">
+    {% for project in projects %}
+    <div class="project-card">
+        <h3>{{ project.name }}</h3>
+        <p><strong>Details:</strong> {{ project.details }}</p>
+        <p><strong>Features:</strong> {{ project.features | join(', ') }}</p>
+        <a href="{{ url_for('project_details', project_id=project.id) }}" class="project-button">View Project</a>
+    </div>
+    {% else %}
+    <p>No projects found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
