@@ -16,9 +16,8 @@
         <label>Select Features:</label>
         <div id="feature-selection" class="feature-selection">
             {% for feature in form.features %}
-                <div class="feature-box" data-value="{{ feature.id }}">
-                    <h4>{{ feature.label }}</h4>
-                    <p>{{ feature.description }}</p> <!-- Assuming each feature has a description -->
+                <div class="feature-box" data-value="{{ feature.data }}">
+                    <h4>{{ feature.label.text }}</h4>
                 </div>
             {% endfor %}
         </div>
@@ -32,7 +31,6 @@
 </form>
 
 <script>
-    // JavaScript to handle feature selection
     document.querySelectorAll('.feature-box').forEach(box => {
         box.addEventListener('click', () => {
             box.classList.toggle('selected');
@@ -48,13 +46,11 @@
 </script>
 
 <style>
-    /* Feature Box Styles */
     .feature-selection {
         display: flex;
-        flex-wrap: wrap; /* Allow boxes to wrap in the container */
-        gap: 15px; /* Space between boxes */
+        flex-wrap: wrap;
+        gap: 15px;
     }
-
     .feature-box {
         border: 2px solid #ddd;
         border-radius: 8px;
@@ -63,19 +59,17 @@
         text-align: center;
         cursor: pointer;
         transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-        width: calc(25% - 20px); /* Adjust width for responsiveness */
-        min-width: 150px; /* Minimum width for smaller screens */
+        width: calc(25% - 20px);
+        min-width: 150px;
     }
-
     .feature-box:hover {
         transform: translateY(-5px);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        border-color: #1976d2; /* Highlight border on hover */
+        border-color: #1976d2;
     }
-
     .feature-box.selected {
-        border-color: #ff9800; /* Highlight selected box */
-        background-color: #fff3e0; /* Light background for selected feature */
+        border-color: #ff9800;
+        background-color: #fff3e0;
     }
 </style>
 {% endblock %}
