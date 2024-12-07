@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Schedule for Project ID: {{ project_id }}</h2>
+<ul>
+    {% for schedule in schedules %}
+    <li>{{ schedule.task_name }} - Date: {{ schedule.task_date }}, Time: {{ schedule.task_time }}</li>
+    {% else %}
+    <li>No scheduled tasks found.</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('user_projects') }}" class="button">Back to My Projects</a>
+{% endblock %}
