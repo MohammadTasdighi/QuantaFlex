@@ -8,6 +8,7 @@
     {% endfor %}
 </ul>
 
+{% if 'profile' in project.features %}
 <h3>Profiles</h3>
 <div class="profiles">
     <ul>
@@ -23,11 +24,16 @@
         {% endfor %}
     </ul>
 </div>
-
 <!-- Button to add a new profile -->
 <a href="{{ url_for('add_profile', entity_id=project.id) }}" class="button">Add Specific Profile</a>
-
 <!-- Button to view all profiles -->
 <a href="{{ url_for('view_profiles', entity_id=project.id) }}" class="button">View All Profiles</a>
+{% endif %}
+
+{% if 'scheduling' in project.features %}
+<h3>Scheduling</h3>
+<a href="{{ url_for('schedule_task', project_id=project.id) }}" class="button">Schedule Task</a>
+<a href="{{ url_for('view_schedule', project_id=project.id) }}" class="button">View Schedule</a>
+{% endif %}
 
 {% endblock %}
