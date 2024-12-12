@@ -2,7 +2,7 @@
 
 **QuantaFlex** is a versatile low-code platform designed for profiling and managing diverse collections. It can be used for various applications such as student management in schools, employee tracking in companies, plant monitoring in greenhouses and more.
 
-##ATTENTION
+## ATTENTION
 Currently, only profile management and scheduling features are ready to work.
 
 ## Features
